@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Buddy | Expense Tracker</title>
+
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- ================= LOGIN PAGE ================= -->
+
+    <section id="login-page" class="login-page">
+
+        <div class="floating-emoji emoji-one">💰</div>
+        <div class="floating-emoji emoji-two">💸</div>
+        <div class="floating-emoji emoji-three">✨</div>
+        <div class="floating-emoji emoji-four">🤑</div>
+
+        <div class="login-card">
+
+            <div class="login-logo">🐷</div>
+
+            <h1>Money Buddy</h1>
+            <p class="login-subtitle">Your money, your rules!</p>
+
+            <div class="funny-message">
+                💬 Your money called. It wants you to track it!
+            </div>
+
+            <form id="login-form">
+
+                <label for="login-username">Username</label>
+
+                <input
+                    type="text"
+                    id="login-username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required
+                >
+
+                <label for="login-password">Password</label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="login-password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        id="toggle-password"
+                        class="password-toggle"
+                        aria-label="Show password"
+                    >👁️</button>
+
+                </div>
+
+                <p id="login-error" class="login-error" aria-live="polite"></p>
+
+                <button type="submit" class="login-button">
+                    LET ME IN! 🚀
+                </button>
+
+            </form>
+
+            <div class="demo-credentials">
+                <h3>🎮 Demo Login Credentials</h3>
+                <p>Username: <strong>moneybuddy</strong></p>
+                <p>Password: <strong>fun123</strong></p>
+            </div>
+
+            <p class="login-footer">
+                Spend smart. Save more. Stress less! 💖
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= EXPENSE TRACKER ================= -->
+
+    <main id="main-dashboard" class="dashboard-hidden">
+
+        <header class="top-header">
+
+            <div class="header-content">
+
+                <div class="brand">
+                    <div class="brand-icon">💰</div>
+
+                    <div>
+                        <h1>Money Buddy</h1>
+                        <p>Your friendly expense tracker ✨</p>
+                    </div>
+                </div>
+
+                <div class="header-actions">
+                    <span class="welcome-badge">👋 Hello, Money Manager!</span>
+                    <button type="button" id="logout-button" class="logout-button">
+                        Logout 🚪
+                    </button>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <div class="container">
+
+            <!-- WELCOME -->
+
+            <section class="welcome-banner">
+                <div>
+                    <span class="section-label">YOUR FINANCIAL CORNER 💖</span>
+
+                    <h2>Welcome to your money playground! 🎉</h2>
+
+                    <p>
+                        Track your expenses, control your budget, and stop
+                        wondering where all your money went!
+                    </p>
+                </div>
+
+                <div class="welcome-emoji">💸</div>
+            </section>
+
+
+            <!-- TOTAL -->
+
+            <section class="overall-total-card">
+
+                <div class="total-icon">💵</div>
+
+                <div>
+                    <p>Total Expenses</p>
+                    <h2 id="total-expenses">₹0.00</h2>
+                    <span id="total-expense-count">0 expenses recorded</span>
+                </div>
+
+            </section>
+
+
+            <!-- ADD EXPENSE -->
+
+            <section class="section-card">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">LET'S RECORD IT</span>
+                        <h2>➕ Add a New Expense</h2>
+                    </div>
+                    <span class="heading-emoji">📝</span>
+                </div>
+
+                <form id="expense-form">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label for="expense-name">Expense Name</label>
+                            <input
+                                type="text"
+                                id="expense-name"
+                                placeholder="Example: Pizza 🍕"
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="expense-amount">Amount (₹)</label>
+                            <input
+                                type="number"
+                                id="expense-amount"
+                                placeholder="Enter amount"
+                                min="0.01"
+                                step="0.01"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="expense-date">Expense Date</label>
+                            <input type="date" id="expense-date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="expense-category">Category</label>
+
+                            <select id="expense-category" required>
+                                <option value="Food">🍕 Food</option>
+                                <option value="Shopping">🛍️ Shopping</option>
+                                <option value="Travel">🚕 Travel</option>
+                                <option value="Bills">🧾 Bills</option>
+                                <option value="Other">🎁 Other</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="primary-button">
+                        Add Expense 💖
+                    </button>
+
+                    <p id="expense-message" class="success-message" aria-live="polite"></p>
+
+                </form>
+
+            </section>
+
+
+            <!-- BUDGET MANAGER -->
+
+            <section class="section-card">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">BE THE BOSS OF YOUR MONEY</span>
+                        <h2>🎯 Budget Manager</h2>
+                    </div>
+                    <span class="heading-emoji">🐷</span>
+                </div>
+
+                <p class="section-description">
+                    Set your spending limits. Your wallet will thank you!
+                </p>
+
+                <div class="budget-grid">
+
+                    <div class="budget-card daily-budget-card">
+                        <h3>☀️ Daily Budget</h3>
+
+                        <label for="daily-budget-input">Daily limit (₹)</label>
+
+                        <div class="budget-input-row">
+                            <input type="number" id="daily-budget-input" min="0" step="0.01" placeholder="e.g. 500">
+                            <button type="button" class="save-budget-button" data-budget="daily">Save</button>
+                        </div>
+
+                        <p>Spent: <strong id="daily-spent">₹0.00</strong></p>
+
+                        <div class="progress-track">
+                            <div id="daily-progress" class="progress-bar"></div>
+                        </div>
+
+                        <p id="daily-budget-status" class="budget-status">Set your daily budget!</p>
+                    </div>
+
+
+                    <div class="budget-card weekly-budget-card">
+                        <h3>📅 Weekly Budget</h3>
+
+                        <label for="weekly-budget-input">Weekly limit (₹)</label>
+
+                        <div class="budget-input-row">
+                            <input type="number" id="weekly-budget-input" min="0" step="0.01" placeholder="e.g. 3000">
+                            <button type="button" class="save-budget-button" data-budget="weekly">Save</button>
+                        </div>
+
+                        <p>Spent: <strong id="weekly-spent">₹0.00</strong></p>
+
+                        <div class="progress-track">
+                            <div id="weekly-progress" class="progress-bar"></div>
+                        </div>
+
+                        <p id="weekly-budget-status" class="budget-status">Set your weekly budget!</p>
+                    </div>
+
+
+                    <div class="budget-card monthly-budget-card">
+                        <h3>🌙 Monthly Budget</h3>
+
+                        <label for="monthly-budget-input">Monthly limit (₹)</label>
+
+                        <div class="budget-input-row">
+                            <input type="number" id="monthly-budget-input" min="0" step="0.01" placeholder="e.g. 10000">
+                            <button type="button" class="save-budget-button" data-budget="monthly">Save</button>
+                        </div>
+
+                        <p>Spent: <strong id="monthly-spent">₹0.00</strong></p>
+
+                        <div class="progress-track">
+                            <div id="monthly-progress" class="progress-bar"></div>
+                        </div>
+
+                        <p id="monthly-budget-status" class="budget-status">Set your monthly budget!</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- DAILY SUMMARY -->
+
+            <section class="section-card">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">TODAY'S MONEY STORY</span>
+                        <h2>☀️ Daily Summary</h2>
+                    </div>
+                </div>
+
+                <div class="summary-grid">
+
+                    <div class="summary-card daily-summary-card">
+                        <span>💸</span>
+                        <p>Total Spent Today</p>
+                        <h3 id="daily-total">₹0.00</h3>
+                    </div>
+
+                    <div class="summary-card daily-summary-card">
+                        <span>🧾</span>
+                        <p>Number of Expenses</p>
+                        <h3 id="daily-count">0</h3>
+                    </div>
+
+                    <div class="summary-card daily-summary-card">
+                        <span>🔥</span>
+                        <p>Highest Expense</p>
+                        <h3 id="daily-highest">₹0.00</h3>
+                    </div>
+
+                </div>
+
+                <h3 class="subheading">🗂️ Today's Category Breakdown</h3>
+                <div id="daily-category-breakdown" class="category-breakdown"></div>
+
+            </section>
+
+
+            <!-- WEEKLY SUMMARY -->
+
+            <section class="section-card">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">YOUR WEEK AT A GLANCE</span>
+                        <h2>📅 Weekly Summary</h2>
+                    </div>
+                </div>
+
+                <p class="section-description">Your week runs from Monday to Sunday.</p>
+
+                <div class="summary-grid">
+
+                    <div class="summary-card weekly-summary-card">
+                        <span>💰</span>
+                        <p>Total Spent This Week</p>
+                        <h3 id="weekly-total">₹0.00</h3>
+                    </div>
+
+                    <div class="summary-card weekly-summary-card">
+                        <span>🧾</span>
+                        <p>Number of Expenses</p>
+                        <h3 id="weekly-count">0</h3>
+                    </div>
+
+                    <div class="summary-card weekly-summary-card">
+                        <span>🔥</span>
+                        <p>Highest Expense</p>
+                        <h3 id="weekly-highest">₹0.00</h3>
+                    </div>
+
+                </div>
+
+                <h3 class="subheading">🗂️ This Week's Category Breakdown</h3>
+                <div id="weekly-category-breakdown" class="category-breakdown"></div>
+
+            </section>
+
+
+            <!-- MONTHLY SUMMARY -->
+
+            <section class="section-card">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">MONTHLY MONEY REPORT</span>
+                        <h2>🌙 Monthly Summary</h2>
+                    </div>
+                </div>
+
+                <div class="summary-grid">
+
+                    <div class="summary-card monthly-summary-card">
+                        <span>💵</span>
+                        <p>Total Spent This Month</p>
+                        <h3 id="monthly-total">₹0.00</h3>
+                    </div>
+
+                    <div class="summary-card monthly-summary-card">
+                        <span>🧾</span>
+                        <p>Number of Expenses</p>
+                        <h3 id="monthly-count">0</h3>
+                    </div>
+
+                    <div class="summary-card monthly-summary-card">
+                        <span>🔥</span>
+                        <p>Highest Expense</p>
+                        <h3 id="monthly-highest">₹0.00</h3>
+                    </div>
+
+                </div>
+
+                <h3 class="subheading">🗂️ This Month's Category Breakdown</h3>
+                <div id="monthly-category-breakdown" class="category-breakdown"></div>
+
+            </section>
+
+
+            <!-- CHARTS -->
+
+            <section class="section-card">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">NUMBERS BUT MAKE THEM FUN</span>
+                        <h2>📊 Expense Charts</h2>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+
+                    <div class="chart-card">
+                        <h3>🥧 All-Time Category Spending</h3>
+                        <div class="chart-container">
+                            <canvas id="category-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3>📊 Weekly Spending</h3>
+                        <div class="chart-container">
+                            <canvas id="weekly-chart"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ALL-TIME CATEGORY SUMMARY -->
+
+            <section class="section-card">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">WHERE DOES IT ALL GO?</span>
+                        <h2>🗂️ Overall Category Summary</h2>
+                    </div>
+                </div>
+
+                <div id="category-summary" class="category-breakdown"></div>
+            </section>
+
+
+            <!-- EXPENSE HISTORY -->
+
+            <section class="section-card">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">YOUR MONEY DIARY</span>
+                        <h2>📒 Expense History</h2>
+                    </div>
+                </div>
+
+                <div class="filter-grid">
+
+                    <div class="form-group">
+                        <label for="search-expense">🔍 Search by Name</label>
+                        <input type="text" id="search-expense" placeholder="Search expenses...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filter-category">🗂️ Filter by Category</label>
+
+                        <select id="filter-category">
+                            <option value="All">All Categories</option>
+                            <option value="Food">🍕 Food</option>
+                            <option value="Shopping">🛍️ Shopping</option>
+                            <option value="Travel">🚕 Travel</option>
+                            <option value="Bills">🧾 Bills</option>
+                            <option value="Other">🎁 Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filter-date">📅 Filter by Date</label>
+                        <input type="date" id="filter-date">
+                    </div>
+
+                </div>
+
+                <button type="button" id="clear-filters" class="secondary-button">
+                    Clear Filters ✨
+                </button>
+
+                <div class="table-wrapper">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Expense</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Category</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="expense-list">
+                            <tr>
+                                <td colspan="6" class="empty-table-message">
+                                    No expenses yet. Add your first expense! 💖
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <p id="history-count" class="history-count">Showing 0 expenses</p>
+
+            </section>
+
+
+            <footer class="footer">
+                <h3>Made with 💖 by Money Buddy</h3>
+                <p>Track your money, not your regrets! 😂</p>
+                <p>Every rupee counts. Every saving matters. ✨</p>
+            </footer>
+
+        </div>
+
+    </main>
+
+    <!-- Use the correct JavaScript filename -->
+    <script src="./script.js"></script>
+
+</body>
+</html>
