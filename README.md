@@ -10,6 +10,8 @@ Money Buddy is a colorful and user-friendly personal expense tracker built with 
 
 ## 📸 About the Project
 
+![Money Buddy Login Page](money-buddy-login.png)
+
 Money Buddy makes expense tracking simple, interactive, and fun! Users can record expenses, organize them by category, set spending limits, and view daily, weekly, and monthly summaries.
 
 The application stores expenses and budgets in the browser using Local Storage, allowing saved information to remain available in the same browser.
